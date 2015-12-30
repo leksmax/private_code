@@ -1,0 +1,57 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.skyworthdigital.tr069"
+    android:versionCode="1"
+    android:sharedUserId="android.uid.system"
+    android:versionName="1.0" >  
+    
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />    
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>     
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    
+ 
+    <uses-sdk
+         android:minSdkVersion="8"
+        android:targetSdkVersion="14" />
+
+    <application
+        android:allowBackup="true"
+        android:persistent="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" android:name="ContextUtil">
+        <activity 
+            android:name=".TR069Setting" 
+            android:label="@string/app_name" 
+            android:theme="@style/setting">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />                                   
+
+            </intent-filter>
+        </activity>
+		<receiver android:name=".SkyTR069Receiver">
+      		<intent-filter>
+         		<action android:name="android.intent.action.BOOT_COMPLETED" />
+         		<action android:name="android.mipt.ott.startTr069" />
+         		<action android:name="com.mipt.boot.complete" />
+         		<action android:name="com.mipt.gotosleep" />
+      		</intent-filter>
+    	</receiver>
+    	<!-- <receiver android:name=".MiptNetInfo">
+             <intent-filter>
+             	<action android:name="android.net.wifi.STATE_CHANGE"/>
+             	<action android:name="android.net.ethernet.STATE_CHANGE"/>    
+             </intent-filter>
+        </receiver> -->
+        <service android:name=".SkyTR069Service" android:enabled="true">
+            <intent-filter android:priority="1000"></intent-filter>
+        </service>
+<!--         <service android:name="com.mipt.tr069.download.NewDownloadService"></service>
+        <provider android:name="com.mipt.tr069.tool.AccountProvider"
+            android:authorities="com.mipt.ott.yueshiting.update" />  -->
+    </application>
+
+</manifest>

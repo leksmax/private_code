@@ -1,0 +1,132 @@
+include Makefile.mk
+
+##############################################################
+# compile target control
+##############################################################
+
+SK_BUILD_BIN	= NO
+SK_BUILD_LIB	= YES
+
+##############################################################
+# output include file and include dir
+##############################################################
+OUT_INC_FILE = sk_tr069.h
+OUT_INC_DIR = $(SK_INCLUDE_API)
+
+##############################################################
+# target name
+##############################################################
+#MODULE_BIN := $(notdir $(CURRENT_DIR))
+MODULE_BIN :=sktr069
+MODULE_LIB_STATIC := $(addprefix lib, $(addsuffix .a, $(MODULE_BIN)))
+MODULE_LIB_SHARED := $(addprefix lib, $(addsuffix .so, $(MODULE_BIN)))
+#MODULE_LIB_SHARED :=
+
+ifeq ($(SK_BUILD_BIN), NO)
+MODULE_BIN :=
+endif
+
+ifeq ($(SK_BUILD_LIB), NO)
+MODULE_LIB_STATIC :=
+MODULE_LIB_SHARED :=
+endif
+
+##############################################################
+# define subdirs that should be compiled in
+##############################################################
+ifeq ($(DEBUG_ENABLE), y)
+SUB_DIRS := 
+endif
+
+##############################################################
+# other module dependent source files
+##############################################################
+C_SRCS +=
+CPP_SRCS +=
+
+##############################################################
+# module dependent header files and libs
+##############################################################
+ifeq ($(DEBUG_ENABLE), y)
+CFLAGS += -DSK_DEBUG
+endif
+
+INCLUDE += 
+#CFLAGS += -fPIC -Wall -g3 -O0
+CFLAGS += 
+#LD_FLAGS +=-levent -ldl 
+LD_FLAGS +=-
+
+##############################################################
+# sub dir compile comand
+##############################################################
+subdir_make = $(MAKE) -C $(CURRENT_DIR)/$(1);
+subdir_clean = $(MAKE) clean -C $(CURRENT_DIR)/$(1);
+
+.PHONY: all clean compile_subdir output_include subdirs $(SUB_DIRS)
+
+all: $(MODULE_LIB_SHARED)  output_include subdirs
+
+$(MODULE_BIN): $(OBJS)
+	@echo -e "\033[40;35m[$(PRJ_NAME)]:\033[0m Linking \033[40;32m$@.....\033[0m"
+	@$(CC) -o $@ $^ $(LD_FLAGS)
+	@$(STRIP) $@
+	@$(CP) $@ $(OUT_BIN_FOLDER)/$@
+
+$(MODULE_LIB_SHARED): $(OBJS)
+	@echo -e "\033[40;35m[$(PRJ_NAME)]:\033[0m Linking \033[40;32m$(MODULE_LIB_SHARED)......\033[0m"
+	$(CC)  -fPIC  -shared  -o $@  $^
+	$(CP) $@ $(OUT_LIB_FOLDER)/$@
+
+$(MODULE_LIB_STATIC): $(OBJS)
+	@echo -e "\033[40;35m[$(PRJ_NAME)]:\033[0m Linking \033[40;32m$@.....\033[0m"
+	@$(AR) -rc $@ $^
+	@$(CP) $@ $(OUT_LIB_FOLDER)/$@
+
+output_include:
+ifneq ($(strip $(OUT_INC_FILE)),) 
+	@echo -e "\033[40;35m[$(PRJ_NAME)]:\033[0m Installing \033[40;32m$(OUT_INC_FILE).....\033[0m"
+	@$(CP) -u ${OUT_INC_FILE} $(OUT_INC_DIR)
+endif
+
+compile_subdir:
+	@ $(foreach n,$(SUB_DIRS),$(call subdir_make,$(n)))
+
+subdirs: $(SUB_DIRS)
+$(SUB_DIRS):
+	@make -C $@
+
+$(C_OBJS): %.o: %.c
+	@echo -e "\033[40;35m[$(PRJ_NAME)]:\033[0m Compiling \033[40;33m$(notdir $@)\033[0m <--- \033[40;32m$(notdir $<)\033[0m......"
+	@$(CC) $(CFLAGS) -MMD -MP -MF "$(@:%.o=%.d)" -MT "$(@:%.o=%.d)" -o "$@" "$<" $(INCLUDE)
+
+$(CPP_OBJS): %.o: %.cpp
+	@echo -e "\033[40;35m[$(PRJ_NAME)]:\033[0m Compiling \033[40;33m$(notdir $@)\033[0m <--- \033[40;32m$(notdir $<)\033[0m......"
+	@$(CXX) $(CFLAGS) -MMD -MP -MF "$(@:%.o=%.d)" -MT "$(@:%.o=%.d)" -o "$@" "$<" $(INCLUDE)
+
+clean: clean_subdir
+	@echo -e "\033[40;35m[$(PRJ_NAME)]:\033[0m Cleaning \033[40;32mobject files and dependency files......\033[0m"
+	@$(RM) $(OBJS) $(DEPS) 
+ifneq ($(strip $(OUT_INC_FILE)),) 
+	@echo -e "\033[40;35m[$(PRJ_NAME)]:\033[0m Uninstalling \033[40;32m$(OUT_INC_FILE).....\033[0m"
+	@$(RM) $(addprefix $(OUT_INC_DIR)/, $(OUT_INC_FILE))
+endif
+
+clean_subdir:
+	@ $(foreach n,$(SUB_DIRS),$(call subdir_clean,$(n)))
+
+ifeq ($(SK_BUILD_BIN), YES)
+	@echo -e "\033[40;35m[$(PRJ_NAME)]:\033[0m Cleaning \033[40;32m$(MODULE_BIN)......\033[0m"
+	@$(RM) $(MODULE_BIN) $(OUT_BIN_FOLDER)/$(MODULE_BIN)
+endif
+
+ifeq ($(SK_BUILD_LIB), YES)
+ifneq ($(MODULE_LIB_SHARED), )
+	@echo -e "\033[40;35m[$(PRJ_NAME)]:\033[0m Cleaning \033[40;32m$(MODULE_LIB_SHARED)......\033[0m"
+	@$(RM) $(MODULE_LIB_SHARED) $(OUT_LIB_FOLDER)/$(MODULE_LIB_SHARED)
+endif
+	@echo -e "\033[40;35m[$(PRJ_NAME)]:\033[0m Cleaning \033[40;32m$(MODULE_LIB_STATIC)......\033[0m"
+	@$(RM) $(MODULE_LIB_STATIC) $(OUT_LIB_FOLDER)/$(MODULE_LIB_STATIC)
+endif
+
+-include $(DEPS)

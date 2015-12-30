@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="app_name">SkTR069</string>
+    <string name="setting">TR069设置</string>
+	<string name="heartbeat">心跳周期</string>
+	<string name="acs">网管地址</string>
+	<string name="username">注册用户</string>
+	<string name="password">注册密码</string>
+	<string name="cpeuser">CPE用户</string>
+	<string name="cpepass">CPE密码</string>
+	<string name="test">test</string>
+</resources>

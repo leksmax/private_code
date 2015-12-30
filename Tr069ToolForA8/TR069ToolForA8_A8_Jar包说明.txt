@@ -1,0 +1,78 @@
+本工程是用于生成jar包，供tr069的apk使用
+
+
+1. 在Utils类中提供一下方法接口：
+1> 获取IP：
+	getIpAddress()；
+2> 获取网络类型：
+	getIPState(Context context)；
+3> 获取Mac：
+	getMac(Context context)；
+4> 获取序列号：
+	getSN()；
+5> 获取软件版本号：
+	getSoftVersion()；
+6> 获取硬件版本号：
+	getHardVersion()；
+7> 获取设备型号：
+	getDeviceModle()；
+8> 获取业务接入地址：
+	getServiceAddress(Context context)；
+9> 获取业务接入账号：
+	getServiceAccount(Context context)；
+10> 获取业务接入密码：
+	getServicePW(Context context)；
+11> 将Tr069的值设置到系统中: 
+	setUserIntallApplication(String paramStr)；
+12> 从系统中获取Tr069的值: 
+	getUserIntallApplication()；
+13> 设置互联网电视平台主地址: 
+	setPlatformUrl(Context paramContext, String paramStr)；
+14> 获取互联网电视平台主地址: 
+	getPlatformUrl(Context paramContext)；
+15> 设置互联网电视平台备份地址: 
+	setPlatformUrlBackup(Context paramContext, String paramStr)；
+16> 获取互联网电视平台备份地址: 
+	getPlatformUrlBackup(Context paramContext)；
+17> 设置终端管理平台主地址: 
+	setUrl(Context paramContext, String paramStr)；
+18> 获取终端管理平台主地址: 
+	getUrl(Context paramContext)；
+19> 设置终端管理平台备份地址: 
+	setUrlBackup(Context paramContext, String paramStr)；
+20> 获取终端管理平台备份地址: 
+	getUrlBackup(Context paramContext)；
+21> 设置HDC地址:
+	setHdcUrl(Context paramContext, String paramStr)；
+22> 获取HDC地址: 
+	getHdcUrl(Context paramContext)；
+//23> 设置HDC登录的账号: 
+//	setUserId(Context paramContext, String paramStr)；
+//24> 获取HDC登录的账号: 
+//	getUserId(Context paramContext)；
+25> 设置静默升级的标志位: 
+	setSilentUpgrade(int paramFlag)；
+26> 获取静默升级的标志位: 
+	getSilentUpgrade()；
+27> 获取ACS用户名:
+	getAcsUserName(Context paramContext)；
+28> 获取ACS密码:
+	getAcsPassword(Context paramContext)；
+29> 设置强制升级的标志位:
+	setForcedUpgrade(int paramFlag)；
+30> 获取强制升级的标志位:
+	getForcedUpgrade()；
+31> 获取用户手机号:
+        getPhoneNumber(Context context)；
+32> 获取用户手机号服务密码:
+        getPhoneServicePassword(Context context)；
+33> 获取Ntp服务器地址:
+		getNtpServer(Context paramContext);
+34> 设置Ntp服务器地址:
+		setNtpServer(String value);
+35> 获取子网掩码地址:
+ 		getMask(Context paramContext);
+36> 获取DNS服务器地址：
+		getDnsServer(Context paramContext);
+37> 获取默认网关地址:
+  		getGateWay(Context paramContext)。

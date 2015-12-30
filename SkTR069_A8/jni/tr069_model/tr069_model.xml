@@ -1,0 +1,356 @@
+<?xml version="1.0"?>
+<model>
+	<schema name="Device" type="object">	
+	<schema name="DeviceSummary" type="string" constraint="1024"  default="Skyworth Digital Tech. Co., Ltd."/>
+	<schema name="DeviceType" type="string"  constraint="32" inform="true"  default="STB"/>
+  	<extension name="Event" type="multipleObject" visible="false">
+      <extension name="EventCode" type="string"/>
+      <extension name="CommandKey" type="string"/>
+    </extension>
+    <schema name="X_00E0FC" type="object">
+       <schema name="ConnectMode" type="string" constraint="64" getter="sk_tr069_get_address_type"/>
+       <schema name="PhyMemSize" type="string"  constraint="64" default="1,048,576"/>
+       <schema name="HDMIConnect" type="string"  constraint="64" default="1"/>
+       <schema name="STBID" type="string" constraint="32" inform="true" getter="sk_tr069_get_stbid"/>
+       <schema name="ServiceInfo" type="object">
+        <schema name="UserID" type="string" constraint="64" write="W" inform="true" getter="sk_tr069_get_authuser"  setter="sk_tr069_set_authuser"/>       	
+       	<schema name="AuthURL" type="string" constraint="256" write="W" inform="true" getter="sk_tr069_get_authurl"  setter="sk_tr069_set_authurl"/>
+		<schema name="PPPoEID" type="string" constraint="256" write="W" inform="true" getter="sk_tr069_get_pppoeid"  setter="sk_tr069_set_pppoeid"/>
+		<schema name="DHCPID" type="string" constraint="256" write="W" inform="true" getter="sk_tr069_get_dhcpid"  setter="sk_tr069_set_dhcpid"/>
+		<schema name="PPPoEPassword" type="string" constraint="256" write="W" inform="true" getter="sk_tr069_get_pppoepass" setter="sk_tr069_set_pppoepass"/>
+       </schema>
+    	<schema name="StorageSize" type="string" default="4G FLASH"/>  
+		<schema name="SQMConfiguration" type="object">
+      		<schema name="SQMServerPort" type="unsignedInt"  default="9999"/>
+		<schema name="SQMLisenPort" type="unsignedInt"  default="8888"/>
+		</schema>
+		<schema name="PlayDiagnostics" type="object">
+	     	<schema name="PlayState" type="int" write="W" getter="sk_tr069_get_play_status"  />  
+	        <schema name="DiagnosticsState" type="string"  write="W" getter="sk_tr069_get_play_state"/>
+	        <schema name="PlayURL" type="string"  write="W" setter="sk_tr069_set_play_url" getter="sk_tr069_get_play_url" />
+	      	</schema>
+		<schema name="PacketCapture" type="object">
+		<schema name="State" type="int"  write="W" setter="sk_tr069_set_PacketCapture_state" getter="sk_tr069_get_PacketCapture_state" />
+		<schema name="IP" type="string"  write="W" setter="sk_tr069_set_PacketCapture_IP" getter="sk_tr069_get_PacketCapture_IP" />
+      	<schema name="Port" type="int" write="W" setter="sk_tr069_set_PacketCapture_Port" getter="sk_tr069_get_PacketCapture_Port"/>
+		<schema name="Duration" type="int" setter="sk_tr069_set_PacketCapture_Duration" getter="sk_tr069_get_PacketCapture_Duration"/>
+		<schema name="UploadURL" type="string" constraint="256"  write="W" setter="sk_tr069_set_PacketCapture_UploadURL" />
+		<schema name="Username" type="string" constraint="32"  write="W" setter="sk_tr069_set_PacketCapture_Username" />
+		<schema name="Password" type="string" constraint="32"  write="W" setter="sk_tr069_set_PacketCapture_Password" />
+		</schema>
+		<schema name="BandwidthDiagnostics" type="object">
+	    <schema name="DiagnosticsState" type="int"  setter="sk_tr069_set_BandwidthDiagnostics_DiagnosticsState" getter="sk_tr069_get_BandwidthDiagnostics_DiagnosticsState"/>       	
+	    <schema name="DownloadURL" type="string" constraint="512"  setter="sk_tr069_set_BandwidthDiagnostics_DownloadURL"/>
+		<schema name="Username" type="string" constraint="128"  setter="sk_tr069_set_BandwidthDiagnostics_Username"/>
+		<schema name="Password" type="string" constraint="128"  setter="sk_tr069_set_BandwidthDiagnostics_Password"/>
+		<schema name="ErrorCode" type="string"  constraint="128" getter="sk_tr069_get_BandwidthDiagnostics_ErrorCode"/>
+		<schema name="MaxSpeed" type="unsignedInt"  getter="sk_tr069_get_BandwidthDiagnostics_MaxSpeed"/>
+		<schema name="MinSpeed" type="unsignedInt"  getter="sk_tr069_get_BandwidthDiagnostics_MinSpeed"/>
+	   	<schema name="AvgSpeed" type="unsignedInt"  getter="sk_tr069_get_BandwidthDiagnostics_AvgSpeed"/>
+	   	</schema>
+		<schema name="LogParaConfiguration" type="object">
+		 <schema name="LogType"  type="int"  write="W" getter="sk_tr069_get_syslog_logtype" setter="sk_tr069_set_syslog_logtype" />
+		 <schema name="LogLevel"  type="int"  write="W" getter="sk_tr069_get_syslog_loglevel" setter="sk_tr069_set_syslog_loglevel" />
+		 <schema name="LogOutPutType"  type="int"  write="W" getter="sk_tr069_get_syslog_puttype" setter="sk_tr069_set_syslog_puttype" />
+		 <schema name="SyslogServer"  type="string"  constraint="256" write="W" getter="sk_tr069_get_syslog_server" setter="sk_tr069_set_syslog_server" />
+		 <schema name="SyslogStartTime"  type="dateTime"  write="W"  getter="sk_tr069_get_syslog_starttime" setter="sk_tr069_set_syslog_starttime"/>
+		 <schema name="SyslogContinueTime"  type="unsignedInt"  write="W" getter="sk_tr069_get_syslog_continue_time" setter="sk_tr069_set_syslog_continue_time" />
+		</schema>		
+       </schema>
+     <schema name="X_CMCC_OTV" type="object">
+     	<schema name="ServiceInfo" type="object">
+			<schema name="PPPoEID" type="string" constraint="256" write="W"  inform="true" getter="sk_tr069_get_pppoeid"  setter="sk_tr069_set_pppoeid"/>
+			<schema name="PPPoEPassword" type="string" constraint="256" write="W"  inform="true" getter="sk_tr069_get_pppoepass" setter="sk_tr069_set_pppoepass"/>
+     		<schema name="DHCPID" type="string" constraint="64" write="W" inform="true" getter="sk_tr069_get_dhcpid" setter="sk_tr069_set_dhcpid"/>
+			<schema name="DHCPPassword" type="string" constraint="256" write="W"  default=""/>
+			<schema name="UserID" type="string" constraint="64" write="W"  inform="true" getter="sk_tr069_get_authuser"  setter="sk_tr069_set_authuser"/>  
+     		<schema name="Password" type="string" constraint="256" write="W"  inform="true"  getter="sk_tr069_get_authpass" setter="sk_tr069_set_authpass"/>
+			<schema name="AuthURL" type="string" constraint="256" write="W" inform="true" getter="sk_tr069_get_authurl"  setter="sk_tr069_set_authurl"/>
+			<schema name="UserInstallApplication" type="int" write="W" inform="true"  getter="sk_tr069_get_user_intall_application" setter="sk_tr069_set_user_intall_application"/>
+			<schema name="PlatformURL" type="string" constraint="256" write="W"  inform="true" getter="sk_tr069_get_platform_url" setter="sk_tr069_set_platform_url"/>
+			<schema name="PlatformURLBackup" type="string" constraint="256" write="W" inform="true" getter="sk_tr069_get_platform_bak_url" setter="sk_tr069_set_platform_bak_url"/>
+			<schema name="HDCURL" type="string" constraint="256" write="W" inform="true" getter="sk_tr069_get_hdc_url" setter="sk_tr069_set_hdc_url"/>
+			<schema name="SilentUpgrade" type="int" write="W" inform="true" getter="sk_tr069_get_silent_upgrade" setter="sk_tr069_set_silent_upgrade"/>
+			<schema name="USBPermitInstalledAPP" type="object">
+			<schema name="NumofAPP" type="int" write="W" getter="sk_tr069_get_usb_permit_installed_app_nums"/>
+			<schema name="MaxNumofAPP" type="unsignedInt" visible="false" default="10"/>
+			<schema name="UsbInstalledAppList" type="multipleObject" write="W" constraint="MaxNumofAPP">
+				<schema name="PackageName" type="string" constraint="256" getter="sk_tr069_get_usb_permit_installed_app_packagename" setter="sk_tr069_set_usb_permit_installed_app_packagename"/>
+				<schema name="ClassName" type="string" constraint="256" getter="sk_tr069_get_usb_permit_installed_app_classname" setter="sk_tr069_set_usb_permit_installed_app_classname"/>
+			</schema>  
+			</schema>   
+	   </schema>    
+      <schema name="STBInfo" type="object">
+       <schema name="STBID" type="string" constraint="32" inform="true" getter="sk_tr069_get_stbid"/>
+       <schema name="PhyMemSize" type="string"   default="A20,1.2GHz"/>  
+    	 <schema name="StorageSize" type="string" default="4G FLASH"/>      	   	 
+     </schema>
+	  <schema name="Extention" type="object">
+		<schema name="AppAutoRunBlackListFlag" type="boolean" write="W" getter="sk_tr069_get_app_auto_run_blacklist_flag" setter="sk_tr069_set_app_auto_run_blacklist_flag"/>     
+		<schema name="NumOfAppAutoRunBlackList" type="int" getter="sk_tr069_get_app_auto_run_blacklist_nums"/>
+		<schema name="MaxNumOfAppAutoRunBlackList" type="unsignedInt" visible="false" default="10"/>
+		<schema name="AppAutoRunBlackList" type="multipleObject" write="W" constraint="MaxNumOfAppAutoRunBlackList">
+		<schema name="PackageName" type="string" constraint="256" getter="sk_tr069_get_app_auto_run_blacklist_app_packagename" setter="sk_tr069_set_app_auto_run_blacklist_app_packagename"/>
+		<schema name="ClassName" type="string" constraint="256" getter="sk_tr069_get_app_auto_run_blacklist_app_classname" setter="sk_tr069_set_app_auto_run_blacklist_app_classname"/>
+		</schema>  	   
+	  </schema>
+	  
+     </schema>
+    <schema name="DeviceInfo" type="object">
+      <schema name="Manufacturer" type="string" constraint="64" write="W" default="SKYWORTH"/>
+      <schema name="ManufacturerOUI" type="string" constraint="6" write="W" default="990104"/>
+      <schema name="ModelName" type="string" inform="true" constraint="64" getter="sk_tr069_get_product_type"/>
+      <schema name="ModelID" type="string" inform="true"  constraint="64" getter="sk_tr069_get_product_type"/>
+      <schema name="Description" type="string" inform="true"  constraint="64" default="SKYWORTH OTT STB"/>
+      <schema name="ProductClass" type="string" constraint="64" getter="sk_tr069_get_product_type"/>
+      <schema name="SerialNumber" type="string" constraint="64" getter="sk_tr069_get_stbid"/>
+      
+      <schema name="HardwareVersion" type="string" constraint="64" inform="true" getter="sk_tr069_get_hd_version"  />
+      <schema name="SoftwareVersion" type="string" constraint="64" inform="true" notification="active" getter="sk_tr069_get_sw_version"/>
+      <schema name="ConfigVersion" type="string" constraint="64" inform="true" default="skyworth for debug"/>
+      <schema name="SafeVersion" type="string" constraint="64" default="v0"/>
+      <schema name="LogoVersion" type="string" constraint="64" default="V301"/>
+      
+	    <schema name="EnabledOptions" type="string" constraint="1024" default="0" />
+      <schema name="AdditionalHardwareVersion" type="string" inform="true" constraint="64" default="LOADER_V:2000008,BOOT_V:8192057,LOGO_V:8192015,PARAM_V:8192015,PLAYLIST_V:-1953855096,FONT_V:2000001,SETTING_V:2000001"/>
+      <schema name="AdditionalSoftwareVersion" type="string" inform="true" constraint="64" default="EU9-hi3716M"/>
+      <schema name="ProvisioningCode" type="string" inform="true" constraint="64" write="W" notification="active" default="WKSS"/>
+			
+	    <schema name="DeviceStatus" type="string" constraint="64" default="Up"/>
+      <schema name="UpTime" type="unsignedInt" inform="true"  getter="sk_tr069_get_up_time"/>
+      <schema name="FirstUseDate" type="dateTime" inform="true"   getter="sk_tr069_get_first_use_date"/>
+      <schema name="DeviceLog" type="string" constraint="32768" default=""/>   
+   </schema>    
+    <schema name="ManagementServer" type="object">
+    	<schema name="URL" type="string" constraint="256" write="W" inform="true" getter="sk_tr069_get_acsurl" setter="sk_tr069_set_acsurl"/>
+    	<schema name="URLBackup" type="string" constraint="256" write="W" inform="true" getter="sk_tr069_get_acsbakurl" setter="sk_tr069_set_acsbakurl"/>
+    	<extension name="Timeout" type="unsignedInt"/>
+    	<schema name="Username" type="string" constraint="256" write="W"  getter="sk_tr069_get_acsuser" setter="sk_tr069_set_acsuser"/>
+      <schema name="Password" type="string" constraint="256" write="W"  getter="sk_tr069_get_acspass" setter="sk_tr069_set_acspass"/>
+      <schema name="PeriodicInformEnable" type="boolean" write="W" getter="sk_tr069_get_inform_enable" setter="sk_tr069_set_inform_enable"/>
+      <schema name="PeriodicInformInterval" type="unsignedInt" write="W" getter="sk_tr069_get_period_inform_interval" setter="sk_tr069_set_period_inform_interval"/>
+      <schema name="PeriodicInformTime" type="dateTime" write="W" getter="sk_tr069_get_period_inform_time" setter="sk_tr069_set_period_inform_time" />
+      <schema name="ParameterKey" type="string" constraint="32" inform="true"  default="12345"/>
+      <schema name="ConnectionRequestURL" type="string" constraint="256" inform="true"  notification="active" getter="sk_tr069_get_request_url"/>
+      <schema name="ConnectionRequestUsername" type="string" constraint="256" inform="true" write="W" getter="sk_tr069_get_requser" setter="sk_tr069_set_requser" />
+      <schema name="ConnectionRequestPassword" type="string" constraint="256" write="W" getter="sk_tr069_get_reqpass" setter="sk_tr069_set_reqpass" />
+      <extension name="ConnectionRequestInterval" type="unsignedInt"  default="0"/>
+      <schema name="UpgradesManaged" type="boolean" write="W" getter="sk_tr069_get_upgrade_manage" setter="sk_tr069_set_upgrade_manage" />
+      <schema name="KickURL" type="string" constraint="256"  default=""/>
+      <schema name="DownloadProgressURL" type="string" constraint="256"  default=""/>
+      <schema name="IPTVServiceUsername" type="string" constraint="256"  default=""/>
+      <schema name="NATDetected" type="string" constraint="32" getter="sk_tr069_get_natdetect" />
+      <schema name="STUNEnable" type="boolean" write="W"  default="0"/>
+      <schema name="STUNServerAddress" type="string" constraint="256" write="W"  default="stunaddress" />
+      <schema name="STUNServerPort" type="unsignedInt" write="W"  default="10000"/>
+      <schema name="STUNUsername" type="string" constraint="256" write="W"  default="stunuser" />
+      <schema name="STUNPassword" type="string" constraint="256" write="W"  default="stunpass" />
+      <schema name="UDPConnectionRequestAddress" type="string" constraint="128" getter="sk_tr069_get_udpconnectaddr" />
+      <schema name="UDPConnectionRequestURL" type="string" constraint="128" getter="sk_tr069_get_udpconnectaddr" />
+      <schema name="UDPConnectionRequestAddressNotificationLimit" type="unsignedInt" write="W"  getter="sk_tr069_get_address_notificationlimit" setter="sk_tr069_set_address_notificationlimit" />
+      <schema name="STUNMaximumKeepAlivePeriod" type="unsignedInt"  write="W"  default="10000" />
+      <schema name="STUNMinimumKeepAlivePeriod" type="unsignedInt"  write="W"  default="20000" />
+      <schema name="URLModifyFlag" type="string" constraint="32"  write="W" getter="sk_tr069_get_urlchange" setter="sk_tr069_set_urlchange"/>
+    </schema>
+    
+    <schema name="Time" type="object">
+    	<schema name="NTPServer1" type="string"  notification="active"  write="W" inform="true" getter="sk_tr069_get_ntp_server" setter="sk_tr069_set_ntp_server"/>  
+    	<schema name="NTPServer2" type="string"  notification="active"  write="W" getter="sk_tr069_get_ntp_server2" setter="sk_tr069_set_ntp_server2"/>  
+    	<schema name="CurrentLocalTime" type="dateTime" notification="active"   write="W" getter="sk_tr069_get_current_time"/>  
+    	<schema name="LocalTimeZone" type="string" notification="active"  write="W"  getter="sk_tr069_get_time_zone" />  
+    </schema>	
+    
+    
+    <schema name="UserInterface" type="object">
+		<schema name="PasswordRequired" type="boolean" write="W" default="1"/>
+		<schema name="PasswordUserSelectable" type="boolean" write="W" default="1"/>
+    	<schema name="AvailableLanguages" type="string"  write="W" default="0:chinese,1:english"/>  
+    	<schema name="CurrentLanguage" type="string"  write="W"  default="chinese" />  
+    	<schema name="StreamServerIP"  type="string" notification="passive" getter="sk_tr069_get_stream_server"/>
+    	<schema name="AutoUpdateServer"  type="string" 	write="W" notification="passive" getter="sk_tr069_get_upgrade_url" setter="sk_tr069_set_upgrade_url" />
+    	<schema name="CDNAgentIP"  type="string" notification="passive" getter="sk_tr069_get_cdn_ip"/>
+    </schema>	   
+    
+    <schema name="Config" type="object">
+    	<schema name="PersistentData" type="string"  constraint="256" write="W"  default="" />  
+    	<schema name="ConfigFile"  type="string" write="W" default=""/>
+    </schema>	  
+            
+    <schema name="LAN" type="object">
+    	<schema name="AddressingType" type="string" notification="passive" inform="true" getter="sk_tr069_get_address_type"/>
+      <schema name="IPAddress" type="string" notification="passive" inform="true" getter="sk_tr069_get_stb_ip"/>
+      <schema name="SubnetMask" type="string" notification="passive" getter="sk_tr069_get_stb_mask"/>
+      <schema name="DefaultGateway" type="string"  notification="passive" getter="sk_tr069_get_stb_gateway"/> 
+      <schema name="DNSServers" type="string" notification="passive" inform="true"  getter="sk_tr069_get_stb_dns"/> 
+      
+      <schema name="MACAddress" type="string" inform="true" notification="passive" getter="sk_tr069_get_stb_mac"/>	  
+      <schema name="MACAddressOverride" type="string" constraint="32" default="0"/> 
+      <schema name="DHCPOptionNumberOfEntries" type="string" constraint="32" default="0"/> 
+      <schema name="IsSupportIPV6" type="string" constraint="32" default="0"/> 
+      <schema name="Stats" type="object">
+      	<schema name="ConnectionUpTime" type="unsignedInt" default="7200"/>
+      	<schema name="TotalBytesSent" type="unsignedInt" default="123000000"/>
+      	<schema name="TotalBytesReceived" type="unsignedInt" default="34125424"/>
+		<schema name="CurrentDayInterval" type="unsignedInt" default="0"/>
+		<schema name="CurrentDayBytesSent" type="unsignedInt" default="0"/>
+		<schema name="CurrentDayBytesReceived" type="unsignedInt" default="0"/>
+		<schema name="CurrentDayPacketsSent" type="unsignedInt" default="0"/>
+		<schema name="CurrentDayPacketsReceived" type="unsignedInt" default="0"/>
+		<schema name="QuarterHourInterval" type="unsignedInt" default="0"/>
+		<schema name="QuarterHourBytesSent" type="unsignedInt" default="0"/>
+		<schema name="QuarterHourBytesReceived" type="unsignedInt" default="0"/>
+		<schema name="QuarterHourPacketsSent" type="unsignedInt" default="0"/>
+		<schema name="QuarterHourPacketsReceived" type="unsignedInt" default="0"/>
+      	<schema name="TotalPacketsSent" type="unsignedInt" default="3465432" />
+      	<schema name="TotalPacketsReceived" type="unsignedInt" default="1023346" />
+       </schema>
+      
+      <schema name="IPPingDiagnostics" type="object">
+      	<schema name="DiagnosticsState" type="string"  write="W" getter="sk_tr069_get_ping_state" setter="sk_tr069_set_ping_state"/>  
+      	<schema name="Host" type="string"  write="W" setter="sk_tr069_set_ping_host" />
+      	<schema name="NumberOfRepetitions" type="unsignedInt"  write="W"  setter="sk_tr069_set_ping_repeat"/>
+      	<schema name="Timeout" type="unsignedInt"  write="W"  setter="sk_tr069_set_ping_timeout"/>
+      	<schema name="DataBlockSize" type="unsignedInt"  write="W"  setter="sk_tr069_set_ping_datasize"/>
+      	<schema name="DSCP" type="unsignedInt"  write="W"  setter="sk_tr069_set_ping_dscp"/>
+      	<schema name="SuccessCount" type="unsignedInt"  getter="sk_tr069_get_ping_successcount"/>
+        <schema name="FailureCount" type="unsignedInt"  getter="sk_tr069_get_ping_failurecount"/>
+        <schema name="AverageResponseTime" type="unsignedInt"   getter="sk_tr069_get_ping_average"/>
+        <schema name="MinimumResponseTime" type="unsignedInt"   getter="sk_tr069_get_ping_mintime"/>
+        <schema name="MaximumResponseTime" type="unsignedInt"   getter="sk_tr069_get_ping_maxtime"/>
+      </schema>	
+      <schema name="TraceRouteDiagnostics" type="object">
+      	<schema name="DiagnosticsState" type="string"  write="W" getter="sk_tr069_get_traceroute_state" setter="sk_tr069_set_traceroute_state"/>  
+      	<schema name="Host" type="string"  write="W" setter="sk_tr069_set_traceroute_host"/>
+      	<schema name="Timeout" type="unsignedInt"  write="W" setter="sk_tr069_set_traceroute_timeout"/>
+      	<schema name="DataBlockSize" type="unsignedInt"  write="W" setter="sk_tr069_set_traceroute_datasize"/>
+      	<schema name="MaxHopCount" type="unsignedInt"  write="W" setter="sk_tr069_set_traceroute_maxhopcount"/>
+      	<schema name="DSCP" type="unsignedInt"  write="W"  setter="sk_tr069_set_traceroute_dscp"/>
+      	<schema name="ResponseTime" type="unsignedInt" getter="sk_tr069_get_traceroute_responsetime"/>
+      	<schema name="NumberOfRouteHops" type="unsignedInt"  write="W" getter="sk_tr069_get_traceroute_numberofroute"/>
+      	<schema name="RouteHops" type="object">
+      		<schema name="1" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host1"/>  
+      		</schema>
+      		<schema name="2" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host2"/>  
+      		</schema>
+      		<schema name="3" type="object">
+      			<schema name="HopHost" type="string" getter="sk_tr069_get_traceroute_host3"/>  
+      		</schema>
+      		<schema name="4" type="object">
+      			<schema name="HopHost" type="string" getter="sk_tr069_get_traceroute_host4"/>  
+      		</schema>
+      		<schema name="5" type="object">
+      			<schema name="HopHost" type="string" getter="sk_tr069_get_traceroute_host5"/>  
+      		</schema>
+      		<schema name="6" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host6"/>  
+      		</schema>
+      		<schema name="7" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host7"/>  
+      		</schema>
+      		<schema name="8" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host8"/>  
+      		</schema>
+      		<schema name="9" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host9"/>  
+      		</schema>
+      		<schema name="10" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host10"/>
+      		</schema>
+		<schema name="11" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host11"/>  
+      		</schema>
+      		<schema name="12" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host12"/>  
+      		</schema>
+      		<schema name="13" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host13"/>  
+      		</schema>
+      		<schema name="14" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host14"/>  
+      		</schema>
+      		<schema name="15" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host15"/>  
+      		</schema>
+      		<schema name="16" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host16"/>  
+      		</schema>
+      		<schema name="17" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host17"/>  
+      		</schema>
+      		<schema name="18" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host18"/>  
+      		</schema>
+      		<schema name="19" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host19"/>  
+      		</schema>
+      		<schema name="20" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host20"/>
+      		</schema>      	
+		<schema name="21" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host21"/>  
+      		</schema>
+      		<schema name="22" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host22"/>  
+      		</schema>
+      		<schema name="23" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host23"/>  
+      		</schema>
+      		<schema name="24" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host24"/>  
+      		</schema>
+      		<schema name="25" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host25"/>  
+      		</schema>
+      		<schema name="26" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host26"/>  
+      		</schema>
+      		<schema name="27" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host27"/>  
+      		</schema>
+      		<schema name="28" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host28"/>  
+      		</schema>
+      		<schema name="29" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host29"/>  
+      		</schema>
+      		<schema name="30" type="object">
+      			<schema name="HopHost" type="string"  getter="sk_tr069_get_traceroute_host30"/>
+      		</schema>      			
+      	</schema>	
+      </schema>	
+
+    </schema>	
+    <schema name="STBService" type="object">
+      	<schema name="StreamingControlProtocols" type="string"  write="W"  default="RTSP,IGMPv2"/>  
+      	<schema name="StreamingTransportProtocols" type="string"  write="W" default="UDP,TCP,RTP"/>  
+      	<schema name="StreamingTransportControlProtocols" type="string"  write="W" default="RTCP"/>  
+      	<schema name="DownloadTransportProtocols" type="string"  write="W" default="HTTP,HTTPS,FTP,FTPS,TFTP"/>  
+      	<schema name="MultiplexTypes" type="string"  write="W" default="MPEG1-SYS,MPEG2-PS,VOB,MPEG2-TS"/>  
+      	
+      	<schema name="MaxDejitteringBufferSize" type="string"  write="W" default="-1"/>  
+      	<schema name="AudioStandards" type="string"  write="W"  default="MPEG1-Part2-Layer2,MPEG1-Part2-Layer3,MPEG2-Part3-Layer2,MPEG2-Part3-Layer3,MP3-Surround,DOLBY-AC3"/>  
+      	<schema name="VideoStandards" type="string"  write="W"  default="MPEG2-Part2,H.264"/>  
+		<schema name="BACDomainName" type="string"  constraint="2048"  write="W" default="skyworth for debug-BACDomainName"/>
+		<schema name="BACAddress1" type="string" constraint="128" write="W" default="skyworth for debug-BACAddress1"/>
+		<schema name="BACAddress2" type="string" constraint="128" write="W" default="skyworth for debug-BACAddress2"/>
+		<schema name="UserID" type="string" constraint="32" write="W" notification="active"  default="skyworth for debug"/>
+		<schema name="Password" type="string" constraint="16" write="W" default="skyworth for debug"/>
+		<schema name="EnabledAlarm" type="boolean" write="W" default="0"/>
+		<schema name="MonitoringInterval" type="int" write="W" default="0"/>
+		<schema name="PacketsLostRateAlarm" type="int" write="W" default="10"/>
+		<schema name="PacketsLost" type="int" default="0"/>
+		<schema name="FramesLostAlarm" type="int" write="W" default="300"/>
+		<schema name="FramesLost" type="int" default="0"/>
+		<schema name="AlarmReason" type="string" constraint="32" default="skyworth for debug"/>
+    </schema>
+    <schema name="GatewayInfo" type="object">
+    	<schema name="ManufacturerOUI" type="string" default="E5100"/>
+    	<schema name="ProductClass" type="string" default="E5100"/>
+    	<schema name="SerialNumber" type="string" constraint="64" getter="sk_tr069_get_stbid" />
+    </schema>
+  </schema>
+</model>
+  
+

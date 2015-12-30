@@ -1,0 +1,61 @@
+#ifndef SKS_TR069_DEF_H_
+#define SKS_TR069_DEF_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+typedef enum{ 
+GET_PARAM, // TM ---> IPTV ??¨¨?2?¨ºy 
+SET_PARAM, // TM ---> IPTV ¨¦¨¨??2?¨ºy 
+REBOOT, // TM ---> IPTV 
+FACTORYRESET, // TM ---> IPTV 
+UPDATE, // TM ---> IPTV 
+VALUE_CHANGE_REPORT, // TM <--- IPTV 
+START, // TM <--- IPTV //6
+HEART_BEAT, // TM <---> IPTV 
+GET_PARAM_REPLY, // TM <--- IPTV 
+SET_PARAM_REPLY, // TM <--- IPTV 
+REBOOT_REPLY, // TM <--- IPTV //10
+FACTORYRESET_REPLY, // TM <--- IPTV 
+UPDATE_REPLY, // TM <--- IPTV 
+VALUE_CHANGE_REPORT_REPLY, // TM <--- IPTV 
+START_FINISH, // TM ---> IPTV 
+HEAT_BEAT_REPLY, // TM <---> IPTV 
+AUTHENTICATEINFOR,//16
+RATELOSS,
+MULTIFAILINFO,
+VODFAILINFO,
+START_PING, //TM<-->IPTV
+START_TRACEROUTE, //TM<->IPTV
+START_TCPDUMP,//TM<->IPTV
+}op_type;
+
+
+typedef struct bindermsg_t{
+    char user[20];
+    int cmd;
+    op_type type;
+    char msg[1024 * 30];
+    int len;
+}bindermsg;
+
+typedef enum tr069_cmd_e
+{
+	IPTV_CMD_ERROR = -1,
+	IPTV_CMD_NULL = 0,
+	IPTV_CONFIG_PARAM_CONNECT_TYPE,
+	IPTV_CONFIG_PARAM_DHCP_USER,
+	IPTV_CONFIG_PARAM_DHCP_PASSWD,
+	IPTV_CONFIG_PARAM_PPPOE_USER,
+	IPTV_CONFIG_PARAM_PPPOE_PASSWD,
+	IPTV_CONFIG_PARAM_IPADDR,
+	IPTV_CONFIG_PARAM_MASK,
+	IPTV_CONFIG_PARAM_DEFGATEWAY,
+	IPTV_CONFIG_PARAM_DNSMAIN,
+} tr069_cmd_t;
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* SKS_TR069_DEF_H_ */

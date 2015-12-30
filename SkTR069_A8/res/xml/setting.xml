@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:settings="http://schemas.android.com/apk/res/com.android.setting"
+	android:title="@string/setting" android:key="parent" >
+    
+    <EditTextPreference android:key="setting_heartbeat"
+        android:title="@string/heartbeat"
+		android:dialogTitle="@string/heartbeat"
+		android:singleLine="true" />
+    
+    <EditTextPreference android:key="setting_acs"
+        android:title="@string/acs"
+		android:dialogTitle="@string/acs"
+		android:singleLine="true" />
+    
+    <EditTextPreference android:key="setting_username"
+        android:title="@string/username"
+		android:dialogTitle="@string/username"
+		android:singleLine="true" />
+    
+    <EditTextPreference android:key="setting_password"
+        android:title="@string/password"
+		android:dialogTitle="@string/password"
+		android:singleLine="true"
+		android:password="true" />
+    
+    <EditTextPreference android:key="setting_cpeuser"
+        android:title="@string/cpeuser"
+		android:dialogTitle="@string/cpeuser"
+		android:singleLine="true" />
+    
+    <EditTextPreference android:key="setting_cpepass"
+        android:title="@string/cpepass"
+		android:dialogTitle="@string/cpepass"
+		android:singleLine="true"
+		android:password="true" />
+
+</PreferenceScreen>
